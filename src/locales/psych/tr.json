@@ -1,0 +1,14 @@
+{
+  "title": "Psikiyatri Araç Kutusu",
+  "search_placeholder": "Ara…",
+  "category_screeners": "Tarama ölçekleri",
+  "category_notes": "Klinik notlar",
+  "category_code": "Puanlama kodu",
+  "to_chat": "Sohbete",
+  "to_editor": "Editöre",
+  "disclaimer": "Şablonlar eğitseldir; klinik yargının yerine geçmez. Kişisel sağlık verisi girmeyin.",
+  "empty_state": "Aramanızla eşleşen öğe yok.",
+  "aria_open_tooltip": "Psikiyatri Araç Kutusunu Aç",
+  "aria_send_to_chat": "Sohbete ekle",
+  "aria_send_to_editor": "Editörde aç"
+}

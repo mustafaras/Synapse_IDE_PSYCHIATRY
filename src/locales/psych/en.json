@@ -1,0 +1,14 @@
+{
+  "title": "Psychiatry Toolkit",
+  "search_placeholder": "Search…",
+  "category_screeners": "Screeners",
+  "category_notes": "Clinical notes",
+  "category_code": "Scoring code",
+  "to_chat": "To Chat",
+  "to_editor": "To Editor",
+  "disclaimer": "Templates are for educational use. Not a substitute for clinical judgment. Avoid PHI.",
+  "empty_state": "No items match your search.",
+  "aria_open_tooltip": "Open Psychiatry Toolkit",
+  "aria_send_to_chat": "Insert into chat",
+  "aria_send_to_editor": "Open code in editor"
+}
