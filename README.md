@@ -1,14 +1,21 @@
-# SynapseCore: Digital Psychiatry Workbench
+<h1 align="center">🧠 SynapseCore: Digital Psychiatry Workbench</h1>
 
-![Build](https://img.shields.io/badge/build-passing-brightgreen)
-![License](https://img.shields.io/badge/license-See%20LICENSE-blue)
-![Release](https://img.shields.io/badge/status-active-success)
-![Contributions](https://img.shields.io/badge/PRs-welcome-informational)
-![Docs](https://img.shields.io/badge/docs-available-lightgrey)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178c6)
-![Vite](https://img.shields.io/badge/Vite-6.x-646cff)
-![OpenTelemetry](https://img.shields.io/badge/telemetry-OpenTelemetry-orange)
-![Digital%20Psychiatry](https://img.shields.io/badge/domain-Digital%20Psychiatry-7b68ee)
+<div align="center">
+
+[![Build](https://img.shields.io/badge/build-passing-brightgreen?style=for-the-badge&logo=github)](.)
+[![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)](LICENSE)
+[![Status](https://img.shields.io/badge/status-active-success?style=for-the-badge)](#)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-blueviolet?style=for-the-badge)](#)
+[![Documentation](https://img.shields.io/badge/docs-available-informational?style=for-the-badge)](#)
+
+<br>
+
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178c6?style=for-the-badge&logo=typescript)](.)
+[![Vite](https://img.shields.io/badge/Vite-6.x-646cff?style=for-the-badge&logo=vite)](.)
+[![React](https://img.shields.io/badge/React-19-61dafb?style=for-the-badge&logo=react)](.)
+[![OpenTelemetry](https://img.shields.io/badge/OpenTelemetry-monitoring-ff7043?style=for-the-badge&logo=opentelemetry)](.)
+
+</div>
 
 ---
 
@@ -125,31 +132,32 @@ Throughout this workflow, all clinical decisions remain with the clinician; AI i
 - Configuration and theming: app config, flags, tokens (`src/config/*`, `src/theme`, `src/ui/theme`).
 
 #### Diagram 1 — High‑level component architecture
+
 ```mermaid
-flowchart LR
-  subgraph UI[UI – React]
-    IDE[IDE & File Explorer\ncomponents/ide, file-explorer]
-    Flows[Structured Flows\ncenterpanel/Flows]
-    Timer[Session Timer\ncenterpanel/timerHooks]
-    MBC[Autoscore Reports\nfeatures/psychiatry/mbc]
-    Chat[AI Panels]
+graph LR
+  subgraph UI["UI Layer - React"]
+    IDE["IDE and File Explorer"]
+    Flows["Structured Flows"]
+    Timer["Session Timer"]
+    MBC["Autoscore Reports"]
+    Chat["AI Panels"]
   end
 
-  subgraph AI[AI Orchestration]
-    Reg[Model Registry\nai/modelRegistry]
-    Map[Sampling Mapper\nai/samplingMapper]
-    Norm[Param Normalizer\nservices/ai/param-normalizer]
-    Adapt[Provider Adapters\nservices/ai/adapters]
+  subgraph AI["AI Orchestration"]
+    Reg["Model Registry"]
+    Map["Sampling Mapper"]
+    Norm["Param Normalizer"]
+    Adapt["Provider Adapters"]
   end
 
-  subgraph Obs[Observability]
-    Otel[otel.ts]
-    Spans[spans.ts]
-    Route[aiRouteTelemetry.ts]
+  subgraph Obs["Observability"]
+    Otel["OpenTelemetry"]
+    Spans["Spans"]
+    Route["AI Route Telemetry"]
   end
 
-  UI -->|prompts, flows| AI
-  AI -->|stream events| UI
+  UI --> AI
+  AI --> UI
   UI --> Obs
   AI --> Obs
 ```
@@ -159,7 +167,7 @@ flowchart LR
 sequenceDiagram
   autonumber
   participant Clin as Clinician
-  participant View as Flow UI (Safety)
+  participant View as Flow UI
   participant Builder as safetyOutcome.ts
   participant Hook as useAiStreaming
   participant Adapt as Adapter
@@ -168,15 +176,15 @@ sequenceDiagram
 
   Clin->>View: Select answers in safety flow
   View->>Builder: buildSafetyOutcome(form, timestamp)
-  Builder-->>View: Outcome prose (safety-focused text)
-  View->>Hook: startStreaming({ provider, model, prompt: outcome })
-  Hook->>Adapt: stream({ messages, options, onEvent })
+  Builder-->>View: Outcome prose (safety-focused)
+  View->>Hook: startStreaming with provider & model
+  Hook->>Adapt: stream with messages & options
   Adapt->>Prov: HTTP request (SSE)
   Prov-->>Adapt: token deltas + usage
-  Adapt-->>Hook: onEvent(delta|usage|done)
+  Adapt-->>Hook: onEvent(delta/usage/done)
   Hook-->>View: onDelta(text), onComplete(full)
   View-->>Clin: Live AI narrative; clinician edits
-  View->>Tele: withSpan("ai.summarise", attrs)
+  View->>Tele: withSpan for ai.summarise
 ```
 
 ---
@@ -187,26 +195,21 @@ The core layout can be understood as three cooperating regions: a left rail for 
 
 ```mermaid
 flowchart LR
-  subgraph Left[Left rail]
-    L1[Patient/session selector]
-    L2[MBC scales
-    (PHQ‑9, GAD‑7, etc.)]
-    L3[Structured flows
-    (Safety, Capacity, Agitation...)]
+  subgraph Left["Left Rail"]
+    L1["Patient and Session<br/>Selector"]
+    L2["MBC Scales<br/>PHQ-9, GAD-7"]
+    L3["Structured Flows<br/>Safety, Capacity"]
   end
 
-  subgraph Center[Center panel]
-    C1[Session timer
-    & segments]
-    C2[Outcome text editor
-    (flow outputs + free text)]
+  subgraph Center["Center Panel"]
+    C1["Session Timer<br/>and Segments"]
+    C2["Outcome Text Editor<br/>Flow Outputs"]
   end
 
-  subgraph Right[Right / bottom panels]
-    R1[AI assistant panel
-    (multi‑provider)]
-    R2[Export / print preview]
-    R3[Status bar & telemetry hints]
+  subgraph Right["Right Panels"]
+    R1["AI Assistant<br/>Multi-Provider"]
+    R2["Export and<br/>Print Preview"]
+    R3["Status Bar and<br/>Telemetry"]
   end
 
   L2 --> C2
@@ -218,17 +221,18 @@ flowchart LR
 This diagram is intentionally abstract; concrete component trees live under `src/centerpanel`, `src/components/ai`, `src/components/ide`, and `src/components/terminal`.
 
 #### Diagram 3 — Module dependency overview
+
 ```mermaid
 graph TD
-  A[features/psychiatry/mbc] -->|exports totals/severity| UI[UI components]
-  B[centerpanel/Flows/builders] -->|build outcome text| UI
-  C[ai/modelRegistry + samplingMapper] -->|build requests| Hook[hooks/useAiStreaming]
-  Hook --> Ad[services/ai/adapters]
-  Ad --> Prov[(Providers)]
-  C --> Obs[observability/*]
+  A["MBC Calculators"] -->|exports scores| UI["UI Components"]
+  B["Flow Builders"] -->|build text| UI
+  C["AI Registry"] -->|build requests| Hook["useAiStreaming"]
+  Hook --> Ad["Adapters"]
+  Ad --> Prov["Providers<br/>OpenAI, Anthropic, Gemini"]
+  C --> Obs["Observability<br/>OpenTelemetry"]
   UI --> Obs
-  C --> Cfg[config/env + flags]
-  UI --> Theme[theme/synapse + ui/theme]
+  C --> Cfg["Config<br/>env and flags"]
+  UI --> Theme["Theme and Styling"]
 ```
 
 ---
@@ -403,41 +407,41 @@ SynapseCore does not compute statistical trend tests or slopes; it simply provid
 
 ```mermaid
 flowchart LR
-  V1[Visit V1\nEnter scales] --> S1[Scores s_m(t1)]
-  S1 --> B1[Severity bands]
-  B1 --> D1[Clinical discussion]
+  V1["Visit 1<br/>Enter scales"] --> S1["Scores at t1"]
+  S1 --> B1["Severity bands"]
+  B1 --> D1["Clinical discussion"]
 
-  V2[Visit V2] --> S2[Scores s_m(t2)]
-  S2 --> B2[Severity bands]
-  B2 --> D2[Clinical discussion]
+  V2["Visit 2"] --> S2["Scores at t2"]
+  S2 --> B2["Severity bands"]
+  B2 --> D2["Clinical discussion"]
 
-  V3[Visit V3] --> S3[Scores s_m(t3)]
-  S3 --> B3[Severity bands]
-  B3 --> D3[Clinical discussion]
+  V3["Visit 3"] --> S3["Scores at t3"]
+  S3 --> B3["Severity bands"]
+  B3 --> D3["Clinical discussion"]
 
-  S1 -.-> T[Trends over time]
+  S1 -.-> T["Trends over time"]
   S2 -.-> T
   S3 -.-> T
-  T --> Dsum[Discuss trajectories, variability, context]
+  T --> Dsum["Discuss trajectories"]
 ```
 
 ```mermaid
 sequenceDiagram
   autonumber
-  participant Pt as Patient / Staff
+  participant Pt as Patient/Staff
   participant MBC as MBC UI
-  participant Calc as calculators.ts
+  participant Calc as calculators
   participant Clin as Clinician
-  participant AI as (Optional) AI panel
+  participant AI as AI Panel
 
-  Pt->>MBC: Enter PHQ‑9 / GAD‑7 / etc.
-  MBC->>Calc: scoreAll(measure, answers)
+  Pt->>MBC: Enter PHQ-9, GAD-7, etc.
+  MBC->>Calc: scoreAll function
   Calc-->>MBC: totals + bands + flags
-  MBC-->>Clin: Display autoscore HTML + history
-  Clin->>Clin: Interpret scores in clinical context
-  Clin->>AI: (Optional) send de‑identified summary
-  AI-->>Clin: Draft narrative for review/edit
-  Clin->>MBC: Save/export edited note
+  MBC-->>Clin: Display autoscore HTML
+  Clin->>Clin: Interpret in context
+  Clin->>AI: Send summary
+  AI-->>Clin: Draft narrative
+  Clin->>MBC: Save/export note
 ```
 
 ### Structured flows and real‑world assessments
@@ -596,12 +600,12 @@ which matches the structure of `buildProviderRequest` followed by an adapter’s
 
 ```mermaid
 flowchart LR
-  C[UI context c] --> BP[buildPrompt(c) \n in features/psychiatry/*]
-  C --> TH[Canonical params \n \n theta in services/ai/param-normalizer]
-  TH --> NP[N_p(θ) \n provider-specific params]
-  BP --> Phi[Φ_p(P, Θ_p) \n adapter HTTP call]
+  C["UI context"] --> BP["buildPrompt in<br/>psychiatry module"]
+  C --> TH["Canonical params"]
+  TH --> NP["Provider-specific<br/>params"]
+  BP --> Phi["Adapter HTTP call"]
   NP --> Phi
-  Phi --> Y[Streaming tokens + usage]
+  Phi --> Y["Streaming tokens"]
 ```
 
 #### Streaming outputs as sequences
@@ -652,22 +656,23 @@ Conceptually, one can also think in terms of a simple **model capability matrix*
 All numbers above are **approximate and conceptual**; any real deployment must consult, and keep in sync with, the actual provider documentation and organisational policies.
 
 #### Diagram 5 — AI pipeline sequence
+
 ```mermaid
 sequenceDiagram
   participant UI
   participant Hook as useAiStreaming
-  participant Build as samplingMapper.ts
-  participant Adapt as adapters/*
+  participant Build as samplingMapper
+  participant Adapt as adapters
   participant Prov as Provider
 
-  UI->>Hook: startStreaming({...})
-  Hook->>Build: buildProviderRequest(params)
-  Build-->>Hook: BuiltProviderRequest (+meta)
-  Hook->>Adapt: stream({ messages, options, onEvent })
+  UI->>Hook: startStreaming
+  Hook->>Build: buildProviderRequest
+  Build-->>Hook: BuiltProviderRequest
+  Hook->>Adapt: stream function
   Adapt->>Prov: HTTP/SSE
-  Prov-->>Adapt: delta/usage/done
-  Adapt-->>Hook: StreamEvent (delta|usage|done|error)
-  Hook-->>UI: onDelta / onError / onComplete
+  Prov-->>Adapt: token delta/usage
+  Adapt-->>Hook: StreamEvent
+  Hook-->>UI: onDelta/onError/onComplete
 ```
 
 #### Example — invoke AI from a feature
@@ -775,12 +780,13 @@ A conceptual example of what a downstream UI card might show:
 This example is **illustrative only**; actual numbers and labels are taken directly from the underlying calculator functions and published PHQ‑9 anchors.
 
 #### From raw responses → autoscore HTML
+
 ```mermaid
 flowchart LR
-  A[Raw item responses] --> B[Clamp & sum\ncalculators.ts]
-  B --> C[Severity band + flags]
-  C --> D[renderAutoscoreHTML]
-  D --> E[Print/export panel]
+  A["Raw item<br/>responses"] --> B["Clamp & sum<br/>calculators"]
+  B --> C["Severity band<br/>+ flags"]
+  C --> D["renderAutoscoreHTML"]
+  D --> E["Print/export"]
 ```
 
 | Scale | Items | Range | Selected anchors |
@@ -799,38 +805,40 @@ The following diagram summarises how autoscores, structured flows, AI summarisat
 
 ```mermaid
 flowchart LR
-  subgraph MBC[Measurement‑Based Care]
-    R[Raw item responses] --> C[calculators.ts\nPHQ‑9, GAD‑7, etc.]
-    C --> S[Totals, bands, flags]
+```mermaid
+flowchart LR
+  subgraph MBC["Measurement Based Care"]
+    R["Item responses"] --> C["Score calculators"]
+    C --> S["Totals and bands"]
   end
 
-  subgraph Flows[Structured flows]
-    UIFlow[Safety / Capacity / Agitation UI] --> Build[Flow builders\n(safetyOutcome, capacityOutcome, ...)]
-    Build --> BaseText[Baseline neutral narrative]
+  subgraph Flows["Structured Flows"]
+    UIFlow["Safety UI"] --> Build["Flow builders"]
+    Build --> BaseText["Narrative"]
   end
 
-  subgraph AI[AI orchestration]
-    BaseText --> Prompt[Prompt template\n(+ optional scale summaries)]
+  subgraph AI["AI Orchestration"]
+    BaseText --> Prompt["Prompt"]
     S --> Prompt
-    Prompt --> Stream[useAiStreaming\n+ adapters/*]
-    Stream --> AISummary[Draft AI summary\n(streamed to UI)]
+    Prompt --> Stream["Streaming"]
+    Stream --> AISummary["AI Summary"]
   end
 
-  subgraph Export[Export / Print]
-    AISummary --> Review[Clinician review/edit]
-    Review --> ExportPane[Export panel\n(PDF/print preview)]
+  subgraph Export["Export"]
+    AISummary --> Review["Review"]
+    Review --> ExportPane["Export panel"]
   end
 
-  R -. no PHI leaves browser by default .-> MBC
-  UIFlow -. local state only .-> Flows
-  Stream -. provider call (deployment‑specific) .-> AISummary
+  R --> MBC
+  UIFlow --> Flows
+  Stream --> AISummary
 ```
 
 This diagram is **conceptual** and describes a typical composition pattern; concrete wiring is visible in feature modules under `src/features` and `src/centerpanel/Flows`.
 
 ---
 
-## Structured Clinical Flows and Session Timer (State Machines + Time)
+## Structured Clinical Flows and Session Timer
 
 ### Flows as structured decision/state machines
 
@@ -863,32 +871,34 @@ For the safety flow, one illustrative (non‑exhaustive) formalization is:
 
 The overall flow can also be visualised as a directed acyclic graph (DAG) over this finite state space: edges represent allowed transitions, and the outcome node has no outgoing edges. In this implementation, transitions are encoded implicitly in the builder logic and UI wiring rather than as a separate graph structure.
 
-```mermaid
-stateDiagram-v2
-  [*] --> Intake
-  Intake --> Ideation: capture ideationStatus
-  Ideation --> Plan: capture intentPlanStatus
-  Plan --> Means: capture meansAccess
-  Means --> Protective: capture protectiveFactors
-  Protective --> Observation: capture observationDiscussed/notes
-  Observation --> Outcome: buildSafetyOutcome(config)
-  Outcome --> [*]
-```
+**Safety Flow Stages:**
+
+| Stage | Purpose | Clinician Action |
+|-------|---------|------------------|
+| 1. **Intake** | Entry point | Begin assessment |
+| 2. **Ideation** | Assess suicidal thoughts | Document presence/absence |
+| 3. **Plan** | Assess intent and plan | Document specificity |
+| 4. **Means** | Assess access to means | Document availability |
+| 5. **Protective** | Assess protective factors | Document supports and strengths |
+| 6. **Observation** | Document risk plan | Document observation level and plan |
+| 7. **Outcome** | Generate narrative | Review and edit outcome text |
+
+---
 
 #### Capacity assessment as a state machine (conceptual)
 
-```mermaid
-stateDiagram-v2
-  [*] --> Context
-  Context --> Understanding: assess understanding
-  Understanding --> Appreciation: assess appreciation
-  Appreciation --> Reasoning: assess reasoning
-  Reasoning --> Choice: assess ability to express a choice
-  Choice --> Outcome: summarize capacity assessment (neutral)
-  Outcome --> [*]
-```
+**Capacity Assessment Stages:**
 
-The capacity builder (`capacityOutcome.ts`) supports documenting each of these elements in text, but does not output a binary "has/does not have capacity" decision; that judgement remains with the clinician.
+| Stage | Element | Assessment Focus |
+|-------|---------|------------------|
+| 1. **Context** | Clinical scenario | Understand decision and context |
+| 2. **Understanding** | Comprehension | Can patient understand information |
+| 3. **Appreciation** | Application | Can patient apply info to self |
+| 4. **Reasoning** | Logic | Can patient reason about options |
+| 5. **Choice** | Expression | Can patient express a choice |
+| 6. **Outcome** | Summary | Document capacity assessment |
+
+The capacity builder (`capacityOutcome.ts`) supports documenting each of these elements in text, but does not output a binary decision; judgement remains with the clinician.
 
 #### Markov‑chain view of flow usage (conceptual)
 
@@ -930,11 +940,8 @@ where `History` is a pseudonymized sequence of past session segments and $\mathc
 
 ```mermaid
 flowchart LR
-  H[Past sessions
-  (local, no PHI)] --> M[useSessionML
-  TF.js model]
-  M --> Sugg[Suggested next segment
-  (label + duration)]
+  H["Past sessions<br/>local data"] --> M["useSessionML<br/>TF.js model"]
+  M --> Sugg["Suggested next<br/>segment"]
   Sugg --> Clin[Clinician may accept/ignore]
 ```
 
@@ -966,12 +973,9 @@ flowchart LR
 
   ```mermaid
   flowchart LR
-    Seg[Raw segments
-    (t_i, \ell_i)] --> Agg[Aggregate
-    T_total, T_\ell, n_\ell]
-    Agg --> Feat[Session feature vector v]
-    Feat -->|Conceptual| ML[useSessionML or
-    offline analytics]
+    Seg["Raw segments<br/>time & labels"] --> Agg["Aggregate<br/>totals & counts"]
+    Agg --> Feat["Session feature<br/>vector"]
+    Feat -->|Conceptual| ML["useSessionML or<br/>offline analytics"]
   ```
 
 ---
@@ -985,20 +989,15 @@ The in‑app IDE (`src/components/ide/*`) and file explorer (`src/components/fil
 - `replaceSelection({ code, language? })`: replace active tab content (with undo stack support).
 
 #### Diagram 6 — Typical developer workflow
+
 ```mermaid
 flowchart TD
-  A[Open IDE panel] --> B[Search for safetyOutcome.ts]
-  B --> C[Edit builder wording]
-  C --> D[Preview in UI]
-  D --> E[Optionally call AI for summaries]
-  E --> F[Export / commit changes]
+  A["Open IDE panel"] --> B["Search for flow files"]
+  B --> C["Edit builder wording"]
+  C --> D["Preview in UI"]
+  D --> E["Call AI for summaries"]
+  E --> F["Export/commit changes"]
 ```
-
-Screenshot placeholders with captions:
-
-- ![Figure 1 – IDE main workspace](docs/figures/fig1_ide_main.svg)
-- ![Figure 2 – Safety flow builder](docs/figures/fig2_safety_flow.svg)
-- ![Figure 3 – Session timer and MBC panel side by side](docs/figures/fig3_timer_mbc.svg)
 
 ---
 
@@ -1134,21 +1133,26 @@ These examples are **conceptual** and do not imply that such analyses are implem
 - You may route telemetry to a local collector via `VITE_OTLP_HTTP` or disable via `CONFIG.flags.enableTracing=false` and `enableMetrics=false`.
 
 #### Diagram 7 — Browser telemetry to OTLP endpoint
+
 ```mermaid
 flowchart LR
-  App[SynapseCore (browser)] -->|spans/metrics| Shims[otel.ts tracer/meter]
-  Shims -->|OTLP HTTP| Collector[(OTel Collector)]
-  Collector --> APM[(APM / Data Lake)]
+  App["SynapseCore<br/>Browser"] -->|spans/metrics| Shims["otel.ts<br/>tracer/meter"]
+  Shims -->|OTLP HTTP| Collector["OTel<br/>Collector"]
+  Collector --> APM["APM/<br/>Data Lake"]
 ```
 
 ```mermaid
 flowchart LR
-  subgraph Metrics[Conceptual evaluation]
-    m1[req_latency_ms] --> U[Utility U]
-    m2[tokens_prompt] --> U
-    m3[tokens_completion] --> U
-    m4[errors_total] --> U
+  subgraph Metrics["Evaluation Metrics"]
+    m1["req_latency_ms"]
+    m2["tokens_prompt"]
+    m3["tokens_completion"]
+    m4["errors_total"]
   end
+  m1 --> U["Utility<br/>Analysis"]
+  m2 --> U
+  m3 --> U
+  m4 --> U
 ```
 
 ---
@@ -1238,15 +1242,3 @@ Teaching and research contexts: suitable for OSCE training, digital psychiatry s
 
 - **Is the session ML model a predictor of clinical outcome or risk?**  
   No. The `useSessionML` hook models time‑allocation patterns (e.g., typical segment sequences) for convenience only; it does not encode or predict clinical risk, response, or outcomes.
-
----
-
-### Figures (placeholders)
-- ![Figure 4 – AI route change toast](docs/figures/fig4_ai_route_toast.svg)
-- ![Figure 5 – Autoscore HTML preview](docs/figures/fig5_autoscore_html.svg)
-- ![Figure 6 – Redaction guardrail report](docs/figures/fig6_redaction.svg)
-
-### Media
-- Demo video: [ADD LINK TO DEMO VIDEO]
-- Main UI screenshot: [INSERT SCREENSHOT OF MAIN UI]
-- Safety flow screenshot: [INSERT SCREENSHOT OF SAFETY FLOW]
