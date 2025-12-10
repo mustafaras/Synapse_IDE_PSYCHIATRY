@@ -1,3 +1,6 @@
+![123](https://github.com/user-attachments/assets/f537e47c-a338-4f95-9055-e21ddfd79f8a)
+
+
 <div align="center">
 
 # 🧠 SynapseCore
@@ -188,9 +191,8 @@ sequenceDiagram
   Adapt->>Prov: HTTP request (SSE)
   Prov-->>Adapt: token deltas + usage
   Adapt-->>Hook: onEvent(delta/usage/done)
-  Hook-->>View: onDelta(text), onComplete(full)
-  View-->>Clin: Live AI narrative; clinician edits
-  View->>Tele: withSpan for ai.summarise
+  Hook-->>View: onDelta(text) and onComplete(full)
+  View-->>Clin: Live AI narrative (clinician edits)
 ```
 
 ---
@@ -807,38 +809,18 @@ flowchart LR
 
 #### Combined view — MBC scores, flows, AI, and export (conceptual)
 
-The following diagram summarises how autoscores, structured flows, AI summarisation, and export tooling can be composed in a **single visit**, while keeping the clinician in control at each stage:
+The following schematic summarises how autoscores, structured flows, AI summarisation, and export tooling can be composed in a **single visit**, while keeping the clinician in control at each stage:
 
-```mermaid
-flowchart LR
-```mermaid
-flowchart LR
-  subgraph MBC["Measurement Based Care"]
-    R["Item responses"] --> C["Score calculators"]
-    C --> S["Totals and bands"]
-  end
+- **Measurement‑Based Care (MBC)**  
+  `Item responses → Score calculators → Totals & bands`
+- **Structured Flows**  
+  `Safety UI → Flow builders → Baseline narrative`
+- **AI Orchestration (optional)**  
+  `Baseline narrative + MBC scores → Prompt → Streaming → AI summary`
+- **Export**  
+  `AI summary → Clinician review/edit → Export panel / print`
 
-  subgraph Flows["Structured Flows"]
-    UIFlow["Safety UI"] --> Build["Flow builders"]
-    Build --> BaseText["Narrative"]
-  end
-
-  subgraph AI["AI Orchestration"]
-    BaseText --> Prompt["Prompt"]
-    S --> Prompt
-    Prompt --> Stream["Streaming"]
-    Stream --> AISummary["AI Summary"]
-  end
-
-  subgraph Export["Export"]
-    AISummary --> Review["Review"]
-    Review --> ExportPane["Export panel"]
-  end
-
-  R --> MBC
-  UIFlow --> Flows
-  Stream --> AISummary
-```
+All arrows represent **clinician‑controlled steps**; AI is used only as an editable drafting aid on text the clinician has already authored or selected.
 
 This diagram is **conceptual** and describes a typical composition pattern; concrete wiring is visible in feature modules under `src/features` and `src/centerpanel/Flows`.
 
