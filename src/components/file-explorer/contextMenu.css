@@ -1,0 +1,5 @@
+.fe-menu{min-width:200px;padding:6px;background:var(--syn-surface-800,#14161b);border:1px solid var(--divider);border-radius:var(--radius-sm);box-shadow:var(--shadow-2)}
+.fe-menu li button{display:flex;align-items:center;gap:8px;width:100%;padding:6px 8px;font:500 var(--font-size-sm)/1.4 var(--font-ui);color:var(--text-primary,#e6e9ef);background:transparent;border-radius:var(--radius-sm)}
+.fe-menu li button:hover{background:rgba(255,255,255,.06)}
+.fe-menu li[aria-checked="true"] button{background:rgba(245,168,11,.18)}
+.fe-menu li button:focus-visible{outline:var(--focus-ring-width) solid var(--focus-ring);outline-offset:2px}

@@ -1,0 +1,39 @@
+.fe-row {
+  display: flex;
+  align-items: center;
+}
+
+.fe-drag-handle {
+  width: 12px;
+  height: 16px;
+  margin-right: 6px;
+  border-radius: 2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ide-accent, #00a6d7);
+  opacity: 0;
+  transition: opacity 120ms ease-in-out;
+}
+
+.fe-row:hover .fe-drag-handle {
+  opacity: 0.9;
+}
+
+.fe-drag-handle[aria-grabbed="true"] {
+  opacity: 1;
+}
+
+.fe-row.dragging {
+  opacity: 0.5;
+}
+
+.fe-drop-target-valid {
+  outline: 1px dashed color-mix(in srgb, var(--ide-accent, #00a6d7) 50%, transparent);
+  outline-offset: 2px;
+}
+
+.fe-drop-target-invalid {
+  outline: 1px dashed rgba(239, 68, 68, 0.5);
+  outline-offset: 2px;
+}

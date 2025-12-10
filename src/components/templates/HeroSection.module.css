@@ -1,0 +1,50 @@
+.logoWrap {
+  margin-bottom: 1.5rem;
+  animation-delay: 0s;
+}
+
+.heroHeading {
+  font-family: JetBrains Mono, Fira Code, "SF Mono", Monaco, Inconsolata, "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", monospace;
+  font-weight: 800;
+  letter-spacing: 0.015em;
+  font-size: clamp(1.6rem,3vw,2.75rem);
+  line-height: 1.08;
+  text-align: center;
+  margin: 0 0 1.75rem 0;
+  background: linear-gradient(90deg,#66E3FF 0%,#27C3F0 35%,#009AC5 65%,#03749A 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-transform: uppercase;
+}
+
+.heroParagraph {
+  font-family: JetBrains Mono, Fira Code, "SF Mono", Monaco, Inconsolata, "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", monospace;
+  font-weight: 400;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  width: 1010px;
+  max-width: 1010px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-align: justify;
+  /* text-justify removed due to limited browser support */
+}
+
+.launchWrap {
+  animation-delay: 0.4s;
+  margin-top: 70px;
+  display: flex;
+  justify-content: center;
+  width: 1010px;
+  max-width: 1010px;
+}
+
+.rocket-icon {
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+.delay100 { animation-delay: 0.1s; }
+.delay200 { animation-delay: 0.2s; }
+.delay400 { animation-delay: 0.4s; }
