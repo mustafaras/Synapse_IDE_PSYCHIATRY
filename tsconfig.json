@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    // Enable stricter checks gradually (app/node configs can override if needed)
+    "strict": true,
+    // Avoid case-sensitivity issues across OSes
+    "forceConsistentCasingInFileNames": true
+  },
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
+}
