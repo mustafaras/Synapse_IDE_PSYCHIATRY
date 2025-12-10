@@ -1,0 +1,16 @@
+
+.list { list-style: none; padding: 0; margin: 0; }
+.childList { list-style: none; padding: 0; margin: 4px 0 0 0; }
+.item {
+  width: 100%; text-align: left; cursor: pointer;
+  padding: 8px 10px; margin-bottom: 6px; border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.06);
+  background: transparent; color: var(--text); font-size: 13px;
+  font-family: var(--font-mono);
+}
+.item:hover { background: rgba(255,255,255,.06); }
+.active {
+  background: rgba(11,132,255,.10);
+  border-color: rgba(11,132,255,.55);
+  color: #cfe3ff;
+}

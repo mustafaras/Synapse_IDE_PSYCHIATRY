@@ -1,0 +1,183 @@
+
+.patientHeaderWrap {
+  position: sticky;
+  top: var(--topbarHeight, 0px);
+  z-index: 100;
+  background-color: #000000;
+
+  border-bottom: none;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.4;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+}
+
+
+.headerWrap {
+
+  position: sticky;
+  top: var(--topbarHeight, 0px);
+  z-index: 100;
+  background-color: #000000;
+
+  border-bottom: none;
+
+
+  padding-left: var(--note-h-gutter);
+  padding-right: var(--note-h-gutter);
+  box-sizing: border-box;
+
+
+  padding-top: 8px;
+  padding-bottom: 8px;
+
+  font-family: var(--font-mono);
+  font-size: var(--chrome-font-size-xs);
+  line-height: var(--chrome-line-height-xs);
+  color: var(--text, #fff);
+}
+
+
+.headerRow,
+.patientHeaderRow {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 4px;
+  column-gap: 12px;
+  align-items: flex-start;
+  font-family: var(--font-mono);
+  font-size: var(--chrome-font-size-xs);
+  line-height: var(--chrome-line-height-xs);
+  color: var(--text, #fff);
+}
+
+.zoneLeft,
+.patientHeaderZoneLeft {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  column-gap: var(--chip-col-gap);
+  row-gap: var(--chip-row-gap);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: var(--chrome-font-size-xs);
+  line-height: var(--chrome-line-height-xs);
+  min-width: 0;
+}
+
+.zoneCenter,
+.patientHeaderZoneCenter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  column-gap: var(--chip-col-gap);
+  row-gap: var(--chip-row-gap);
+  color: rgba(255,255,255,0.8);
+  font-family: var(--font-mono);
+  font-size: var(--chrome-font-size-xs);
+  line-height: var(--chrome-line-height-xs);
+  min-width: 0;
+}
+
+.zoneRight,
+.patientHeaderZoneRight {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin-left: auto;
+  column-gap: var(--chip-col-gap);
+  row-gap: var(--chip-row-gap);
+  min-width: fit-content;
+  font-family: var(--font-mono);
+  font-size: var(--chrome-font-size-xs);
+  line-height: var(--chrome-line-height-xs);
+  color: rgba(255,255,255,0.9);
+}
+
+.hName {
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.chip {
+  font-family: var(--font-mono);
+  font-size: var(--chrome-font-size-xs);
+  line-height: 1.2;
+  padding: 2px 8px;
+  border-radius: var(--pill-radius);
+  border: 1px solid var(--pill-border-color);
+  color: var(--text,#eaf2ff);
+  background: var(--pill-bg);
+  display: inline-flex; align-items: center; min-height: 20px;
+}
+
+
+.headerPill {
+  font-family: var(--font-mono);
+  font-size: var(--chrome-font-size-xs);
+  line-height: 1.2;
+  border: 1px solid var(--pill-border-color);
+  border-radius: var(--pill-radius);
+  background: var(--pill-bg);
+  padding: 2px 8px;
+  min-height: 20px;
+  display: inline-flex;
+  align-items: center;
+  cursor: default;
+  user-select: text;
+}
+
+.riskChip {
+  font-family: var(--font-mono);
+  font-size: var(--chrome-font-size-xs);
+  line-height: 1.2;
+  padding: 2px 8px;
+  border-radius: var(--pill-radius);
+  border: 1px solid var(--pill-border-color);
+  background: var(--pill-bg);
+}
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: var(--chrome-font-size-xs);
+  line-height: 1.2;
+  padding: 2px 8px;
+  border-radius: var(--pill-radius);
+  color: #d9e7ff;
+  background: var(--pill-bg);
+  border: 1px solid var(--pill-border-color);
+  display: inline-flex; align-items: center; min-height: 20px;
+}
+
+.meta {
+  font-family: var(--font-mono);
+  font-size: var(--chrome-font-size-xs);
+  line-height: var(--chrome-line-height-xs);
+  color: rgba(255,255,255,0.6);
+  white-space: nowrap;
+}
+
+
+.metaTextLocal {
+  font-family: var(--font-mono);
+  font-size: var(--chrome-font-size-xs);
+  line-height: var(--chrome-line-height-xs);
+  color: rgba(255,255,255,0.6);
+  white-space: nowrap;
+}
+
+.actions { display: inline-flex; gap: 6px; }
+
+.patientHeaderAlert {
+  border-radius: 4px;
+  font-size: 11px;
+  line-height: 1.4;
+  padding: 4px 6px;
+  font-family: var(--font-mono);
+  font-weight: 500;
+}

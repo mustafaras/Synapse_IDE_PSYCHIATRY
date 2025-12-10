@@ -1,0 +1,35 @@
+
+
+.root {
+  display: block;
+}
+
+.headerBar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--cp-surface, #0f1620);
+  border-bottom: 1px solid var(--cp-border, #253042);
+  padding: 8px 12px;
+}
+
+.contextLine { opacity: 0.75; font-size: 12px; }
+
+.content { display: block; }
+
+
+.headerChrome {
+  background: var(--ui-card-bg, rgba(255,255,255,.03));
+  border: 1px solid var(--ui-card-border, rgba(255,255,255,.07));
+  border-left: 0; border-right: 0;
+}
+.headTools { display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+.headDivider { width:1px; height:22px; background: rgba(255,255,255,.14); border-radius:1px; margin:0 2px; }
+
+
+.headTools :where(button)[data-active="true"] {
+  border-color: var(--accentBlue);
+  box-shadow: 0 0 0 1px var(--accentBlue) inset;
+  color: #fff;
+  background: rgba(0,166,215,0.18);
+}

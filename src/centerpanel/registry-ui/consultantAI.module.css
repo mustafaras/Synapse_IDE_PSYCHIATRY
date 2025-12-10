@@ -1,0 +1,102 @@
+
+.aiRailRoot {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 12px 12px 80px;
+  background: rgba(0,0,0,0.15);
+  border-left: 1px solid rgba(255,255,255,0.07);
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+.aiCard {
+  background: rgba(0,0,0,0.25);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.aiCardHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.aiCardTitle {
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 600;
+  font-family: var(--mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+  color: rgba(255,255,255,0.9);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.aiCardSub {
+  font-size: 10px;
+  line-height: 1.4;
+  font-family: var(--mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+  color: rgba(255,255,255,0.5);
+}
+
+.aiCardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.aiSnippetBlock {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 6px;
+  padding: 8px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.8);
+}
+
+.aiSnippetText {
+  font-size: 11px;
+  line-height: 1.4;
+  color: rgba(255,255,255,0.8);
+  font-family: var(--mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.aiSnippetMeta {
+  font-size: 10px;
+  line-height: 1.4;
+  color: rgba(255,255,255,0.5);
+  font-family: var(--mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+}
+
+.aiInsertBtn {
+  align-self: flex-start;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 6px;
+  color: rgba(255,255,255,0.9);
+  font-size: 11px;
+  line-height: 1.4;
+  font-family: var(--mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+  padding: 3px 6px;
+  cursor: pointer;
+  box-shadow: 0 16px 32px rgba(0,0,0,0.7);
+}
+
+.aiInsertBtn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.aiInsertBtn:hover:enabled {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.5);
+}

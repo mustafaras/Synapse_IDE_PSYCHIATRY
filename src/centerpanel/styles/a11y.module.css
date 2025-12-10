@@ -1,0 +1,54 @@
+.srOnly {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+
+.focusRing:focus-visible {
+  outline: 2px solid var(--tab-active-underline, #5aa9ff);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+
+.skipLink {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  z-index: 1000;
+  color: var(--text-strong, #fff);
+  background: var(--bg-raised, #0b0f14);
+  border: 1px solid var(--border-subtle, #2a2f36);
+  padding: 6px 10px;
+  border-radius: 6px;
+  transform: translateY(-200%);
+}
+.skipLink:focus-visible {
+  transform: translateY(0%);
+}
+
+
+.touchTarget {
+  min-width: 40px;
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .motionSafe,
+  .reduceMotion {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

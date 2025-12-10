@@ -1,0 +1,220 @@
+
+
+:root {
+
+
+
+  --hdr-surface-base: rgba(12, 15, 20, 0.88);
+  --hdr-surface-elevated: rgba(18, 22, 28, 0.92);
+  --hdr-surface-overlay: rgba(255, 255, 255, 0.04);
+
+
+  --hdr-text-primary: #ffffff;
+  --hdr-text-secondary: rgba(255, 255, 255, 0.75);
+  --hdr-text-tertiary: rgba(255, 255, 255, 0.50);
+  --hdr-text-disabled: rgba(255, 255, 255, 0.35);
+
+
+  --hdr-border-subtle: rgba(255, 255, 255, 0.08);
+  --hdr-border-default: rgba(255, 255, 255, 0.12);
+  --hdr-border-strong: rgba(255, 255, 255, 0.20);
+
+
+  --hdr-accent-primary: #0d74c7;
+  --hdr-accent-primary-hover: #1e8dd9;
+  --hdr-accent-primary-active: #0a5ea3;
+  --hdr-accent-secondary: #3aa0ff;
+
+
+  --hdr-focus-ring: #0d74c7;
+  --hdr-focus-ring-offset: 2px;
+  --hdr-focus-glow: rgba(13, 116, 199, 0.40);
+
+
+  --hdr-state-success: #17c964;
+  --hdr-state-warning: #f5a524;
+  --hdr-state-error: #ff4961;
+  --hdr-state-info: #3aa0ff;
+
+
+  --hdr-interactive-hover: rgba(255, 255, 255, 0.08);
+  --hdr-interactive-active: rgba(255, 255, 255, 0.12);
+  --hdr-interactive-selected: rgba(13, 116, 199, 0.16);
+
+
+
+  --hdr-space-0: 0;
+  --hdr-space-1: 4px;
+  --hdr-space-2: 8px;
+  --hdr-space-3: 12px;
+  --hdr-space-4: 16px;
+  --hdr-space-5: 20px;
+  --hdr-space-6: 24px;
+  --hdr-space-8: 32px;
+  --hdr-space-10: 40px;
+  --hdr-space-12: 48px;
+  --hdr-space-16: 64px;
+
+
+
+
+  --hdr-font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, 'Helvetica Neue', Arial, sans-serif;
+  --hdr-font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+
+  --hdr-text-xs: 11px;
+  --hdr-text-sm: 12px;
+  --hdr-text-base: 13px;
+  --hdr-text-md: 14px;
+  --hdr-text-lg: 16px;
+  --hdr-text-xl: 18px;
+
+
+  --hdr-leading-none: 1;
+  --hdr-leading-tight: 1.25;
+  --hdr-leading-snug: 1.375;
+  --hdr-leading-normal: 1.5;
+  --hdr-leading-relaxed: 1.625;
+
+
+  --hdr-weight-normal: 400;
+  --hdr-weight-medium: 500;
+  --hdr-weight-semibold: 600;
+  --hdr-weight-bold: 700;
+
+
+  --hdr-tracking-tight: -0.02em;
+  --hdr-tracking-normal: 0;
+  --hdr-tracking-wide: 0.02em;
+  --hdr-tracking-wider: 0.04em;
+
+
+
+  --hdr-radius-none: 0;
+  --hdr-radius-sm: 4px;
+  --hdr-radius-base: 6px;
+  --hdr-radius-md: 8px;
+  --hdr-radius-lg: 12px;
+  --hdr-radius-xl: 16px;
+  --hdr-radius-full: 9999px;
+
+
+
+  --hdr-shadow-none: none;
+  --hdr-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --hdr-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.10), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --hdr-shadow-base: 0 4px 8px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
+  --hdr-shadow-md: 0 8px 16px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.10);
+  --hdr-shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.18), 0 8px 16px rgba(0, 0, 0, 0.12);
+  --hdr-shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.22), 0 12px 24px rgba(0, 0, 0, 0.15);
+
+
+  --hdr-shadow-focus: 0 0 0 var(--hdr-focus-ring-offset) var(--hdr-focus-ring),
+                      0 0 0 calc(var(--hdr-focus-ring-offset) + 2px) var(--hdr-focus-glow);
+  --hdr-shadow-glow: 0 0 16px rgba(13, 116, 199, 0.30);
+
+
+
+
+  --hdr-height-comfortable: 64px;
+  --hdr-height-compact: 52px;
+  --hdr-height-ultra: 44px;
+  --hdr-height: var(--hdr-height-comfortable);
+
+
+  --hdr-control-height-comfortable: 36px;
+  --hdr-control-height-compact: 32px;
+  --hdr-control-height-ultra: 28px;
+  --hdr-control-height: var(--hdr-control-height-comfortable);
+
+
+  --hdr-padding-x-comfortable: 20px;
+  --hdr-padding-x-compact: 16px;
+  --hdr-padding-x-ultra: 12px;
+  --hdr-padding-x: var(--hdr-padding-x-comfortable);
+
+
+  --hdr-gap-comfortable: 16px;
+  --hdr-gap-compact: 12px;
+  --hdr-gap-ultra: 8px;
+  --hdr-gap: var(--hdr-gap-comfortable);
+
+
+
+  --hdr-transition-faster: 100ms;
+  --hdr-transition-fast: 150ms;
+  --hdr-transition-base: 200ms;
+  --hdr-transition-smooth: 250ms;
+  --hdr-transition-slow: 300ms;
+  --hdr-transition-slower: 400ms;
+
+
+  --hdr-ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --hdr-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --hdr-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --hdr-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --hdr-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+
+
+  --hdr-z-base: 0;
+  --hdr-z-sticky: 10;
+  --hdr-z-dropdown: 20;
+  --hdr-z-popover: 25;
+  --hdr-z-overlay: 30;
+  --hdr-z-modal: 40;
+  --hdr-z-toast: 50;
+
+
+
+  --hdr-bp-sm: 640px;
+  --hdr-bp-md: 768px;
+  --hdr-bp-lg: 1024px;
+  --hdr-bp-xl: 1280px;
+  --hdr-bp-2xl: 1536px;
+
+
+
+  --hdr-backdrop-blur: 12px;
+  --hdr-backdrop-saturate: 120%;
+}
+
+
+
+
+
+
+
+
+[data-density="compact"] {
+  --hdr-height: var(--hdr-height-compact);
+  --hdr-control-height: var(--hdr-control-height-compact);
+  --hdr-padding-x: var(--hdr-padding-x-compact);
+  --hdr-gap: var(--hdr-gap-compact);
+}
+
+[data-density="ultra"] {
+  --hdr-height: var(--hdr-height-ultra);
+  --hdr-control-height: var(--hdr-control-height-ultra);
+  --hdr-padding-x: var(--hdr-padding-x-ultra);
+  --hdr-gap: var(--hdr-gap-ultra);
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --hdr-transition-faster: 0ms;
+    --hdr-transition-fast: 0ms;
+    --hdr-transition-base: 0ms;
+    --hdr-transition-slow: 0ms;
+    --hdr-transition-slower: 0ms;
+  }
+}
+
+
+@media (prefers-reduced-transparency: reduce) {
+  :root {
+    --hdr-surface-base: rgba(12, 15, 20, 0.98);
+    --hdr-backdrop-blur: 0px;
+  }
+}
