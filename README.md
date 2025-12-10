@@ -1,14 +1,20 @@
-<h1 align="center">🧠 SynapseCore: Digital Psychiatry Workbench</h1>
+<div align="center">
+
+# 🧠 SynapseCore
+## **Digital Psychiatry Workbench**
+
+*A clinician-facing, AI-augmented platform for structured mental health assessments*
+
+</div>
 
 <div align="center">
+
+### Status & Technology
 
 [![Build](https://img.shields.io/badge/build-passing-brightgreen?style=for-the-badge&logo=github)](.)
 [![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)](LICENSE)
 [![Status](https://img.shields.io/badge/status-active-success?style=for-the-badge)](#)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-blueviolet?style=for-the-badge)](#)
-[![Documentation](https://img.shields.io/badge/docs-available-informational?style=for-the-badge)](#)
-
-<br>
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178c6?style=for-the-badge&logo=typescript)](.)
 [![Vite](https://img.shields.io/badge/Vite-6.x-646cff?style=for-the-badge&logo=vite)](.)
@@ -871,34 +877,34 @@ For the safety flow, one illustrative (non‑exhaustive) formalization is:
 
 The overall flow can also be visualised as a directed acyclic graph (DAG) over this finite state space: edges represent allowed transitions, and the outcome node has no outgoing edges. In this implementation, transitions are encoded implicitly in the builder logic and UI wiring rather than as a separate graph structure.
 
-**Safety Flow Stages:**
+#### Safety Flow Workflow
 
-| Stage | Purpose | Clinician Action |
-|-------|---------|------------------|
-| 1. **Intake** | Entry point | Begin assessment |
-| 2. **Ideation** | Assess suicidal thoughts | Document presence/absence |
-| 3. **Plan** | Assess intent and plan | Document specificity |
-| 4. **Means** | Assess access to means | Document availability |
-| 5. **Protective** | Assess protective factors | Document supports and strengths |
-| 6. **Observation** | Document risk plan | Document observation level and plan |
-| 7. **Outcome** | Generate narrative | Review and edit outcome text |
+The safety flow guides clinicians through seven structured stages:
+
+1. **Intake** — Entry point where clinician begins the assessment.
+2. **Ideation** — Assess presence or absence of suicidal thoughts; document explicitly.
+3. **Plan** — Assess specificity and detail of any stated plan; record findings neutrally.
+4. **Means** — Assess access to methods and lethality; document availability and context.
+5. **Protective Factors** — Identify and document patient strengths, supports, and protective elements.
+6. **Observation & Management** — Determine and document recommended observation level and safety plan details.
+7. **Outcome** — Generate a neutral, clinician-editable narrative summarizing the assessment.
+
+Each stage builds on prior information, and the clinician remains in control at every step. The outcome is a prose summary suitable for the clinical record.
 
 ---
 
-#### Capacity assessment as a state machine (conceptual)
+#### Capacity Assessment Workflow
 
-**Capacity Assessment Stages:**
+Capacity assessment follows a structured framework based on established clinical principles:
 
-| Stage | Element | Assessment Focus |
-|-------|---------|------------------|
-| 1. **Context** | Clinical scenario | Understand decision and context |
-| 2. **Understanding** | Comprehension | Can patient understand information |
-| 3. **Appreciation** | Application | Can patient apply info to self |
-| 4. **Reasoning** | Logic | Can patient reason about options |
-| 5. **Choice** | Expression | Can patient express a choice |
-| 6. **Outcome** | Summary | Document capacity assessment |
+1. **Clinical Context** — Establish the decision to be made and the clinical circumstances.
+2. **Understanding** — Assess whether the patient can comprehend relevant information presented in clear language.
+3. **Appreciation** — Assess whether the patient can apply that information to their own situation.
+4. **Reasoning** — Assess whether the patient can logically deliberate among options and consequences.
+5. **Expression of Choice** — Assess whether the patient can communicate a clear, consistent choice.
+6. **Outcome Documentation** — Record findings neutrally without binary judgment; the clinician makes the final determination.
 
-The capacity builder (`capacityOutcome.ts`) supports documenting each of these elements in text, but does not output a binary decision; judgement remains with the clinician.
+The capacity builder (`capacityOutcome.ts`) supports documenting each of these elements in text and generating a structured narrative. It does not output a binary "capacity" or "incapacity" decision; that judgement remains with the clinician based on local standards and policy.
 
 #### Markov‑chain view of flow usage (conceptual)
 
