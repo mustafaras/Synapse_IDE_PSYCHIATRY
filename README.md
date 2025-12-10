@@ -29,6 +29,7 @@
 ---
 
 ## Extended High‑Level Overview
+<img width="2508" height="1274" alt="image" src="https://github.com/user-attachments/assets/48548c01-0a72-4dcc-b643-63c5f730e7a5" />
 
 SynapseCore is a clinician‑facing, AI‑augmented workbench for psychiatry. It addresses persistent problems in clinical practice: documentation burden, fragmented tooling across risk/safety workflows, and variable adoption of Measurement‑Based Care (MBC). The application consolidates validated symptom scales, structured clinical flows (e.g., safety reviews, capacity, agitation), and a session timer into a single workspace that favors clarity, auditability, and reproducibility.
 
@@ -43,6 +44,7 @@ Typical usage contexts include outpatient follow‑up, consultation‑liaison (C
 ---
 
 ## Quickstart
+<img width="2494" height="1252" alt="image" src="https://github.com/user-attachments/assets/3d3593fa-a63c-4a03-bd79-df23524b03ce" />
 
 ### Prerequisites
 
@@ -132,6 +134,7 @@ Throughout this workflow, all clinical decisions remain with the clinician; AI i
 ---
 
 ## Deep Architecture Overview
+<img width="2504" height="1266" alt="image" src="https://github.com/user-attachments/assets/30513cd9-36ca-479c-a341-732fcdbee2c5" />
 
 ### Layered view
 - UI layer: clinical flows (`src/centerpanel/Flows/*`), timer (`src/centerpanel/timerHooks/*`), MBC outputs, and IDE/file explorer (`src/components/ide/*`, `src/components/file-explorer/*`).
@@ -453,6 +456,7 @@ sequenceDiagram
 ```
 
 ### Structured flows and real‑world assessments
+<img width="1487" height="1220" alt="image" src="https://github.com/user-attachments/assets/0fc5a72d-939b-441f-b926-e8ad835af278" />
 
 Flow builders (e.g., safety, capacity, agitation, catatonia, observation) encode clinically neutral phrasing that can be edited by the clinician. For example, `safetyOutcome.ts` constructs sentences about ideation, intent/plan, access to means, protective factors, and observation strategy with explicit disclaimers regarding scope and local policy.
 
@@ -530,6 +534,7 @@ This supports the clinician in making a clear risk formulation and describing im
   - Optionally use AI summarisation to provide a brief, structured “since‑last‑visit” narrative.
 
 This enables visualization of trends (e.g., persistently high PTSD symptoms, improving depression) without algorithmic triage.
+<img width="1368" height="1157" alt="image" src="https://github.com/user-attachments/assets/8b5f6470-3c51-48b4-ae0b-96a258dec891" />
 
 ### Intended workflows
 
@@ -617,6 +622,7 @@ flowchart LR
 ```
 
 #### Streaming outputs as sequences
+<img width="1380" height="1149" alt="image" src="https://github.com/user-attachments/assets/398b1819-0850-41c2-a3ea-fee48a30e4a7" />
 
 In practice, providers return streaming outputs that we can model as finite sequences
 
@@ -827,6 +833,7 @@ This diagram is **conceptual** and describes a typical composition pattern; conc
 ---
 
 ## Structured Clinical Flows and Session Timer
+<img width="1409" height="1177" alt="image" src="https://github.com/user-attachments/assets/91157f33-c63a-4bdc-91b4-209d76699f07" />
 
 ### Flows as structured decision/state machines
 
@@ -913,6 +920,9 @@ To reiterate and make the boundaries explicit, SynapseCore tooling is designed t
 Any deployment in a clinical environment must treat this as documentation tooling only and ensure local policies, consent, and governance are followed.
 
 ### Session timer, segments, and session analytics
+<img width="1589" height="1232" alt="image" src="https://github.com/user-attachments/assets/aa880328-a251-441a-9014-7d8f67d5421b" />
+<img width="1343" height="1213" alt="image" src="https://github.com/user-attachments/assets/30e6e251-1264-4098-9eb8-f4886b6e2285" />
+<img width="1318" height="1204" alt="image" src="https://github.com/user-attachments/assets/a536e6e9-42db-4b8e-b391-f1081fcac887" />
 
 The timer stack (`src/centerpanel/timerHooks/*`) tracks segments, laps, and pauses and persists to localStorage. Conceptually, a session is a finite sequence of labeled time segments:
 
@@ -1144,6 +1154,7 @@ flowchart LR
 ```
 
 ---
+<img width="1319" height="1209" alt="image" src="https://github.com/user-attachments/assets/2f5c7872-158b-4c48-a41b-faa866c5080b" />
 
 ## Project Status, Roadmap, and Contributing
 
@@ -1192,6 +1203,7 @@ Teaching and research contexts: suitable for OSCE training, digital psychiatry s
 ---
 
 ## Appendix / Glossary / FAQ
+<img width="1398" height="1149" alt="image" src="https://github.com/user-attachments/assets/aba3af5d-ee87-49ed-80f1-340a058a25c0" />
 
 ### Glossary
 - **MBC:** Measurement‑Based Care — routine use of validated scales to guide treatment.
@@ -1230,3 +1242,4 @@ Teaching and research contexts: suitable for OSCE training, digital psychiatry s
 
 - **Is the session ML model a predictor of clinical outcome or risk?**  
   No. The `useSessionML` hook models time‑allocation patterns (e.g., typical segment sequences) for convenience only; it does not encode or predict clinical risk, response, or outcomes.
+
