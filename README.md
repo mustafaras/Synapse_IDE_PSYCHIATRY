@@ -1088,17 +1088,15 @@ where $\alpha, \beta, \gamma > 0$ are weights chosen by the evaluator and `notes
 
 We can also treat telemetry fields as random variables over repeated interactions:
 
-- $L$ as a latency random variable with empirical mean $\mathbb{E}[L]$ and variance $\mathrm{Var}(L)$ estimated from `req_latency_ms`.
-- $T_p$ and $T_c$ as token‑count random variables with $\mathbb{E}[T_p]$, $\mathbb{E}[T_c]$ and associated variances.
-- $E$ as a Bernoulli error indicator (1 if an error occurred, 0 otherwise) with error probability
-
-  $$ P(E = 1) = \mathbb{E}[E] \approx \frac{\text{errors\_total}}{\text{requests\_total}}. $$
+- $`L`$ as a latency random variable with empirical mean $`\mathbb{E}[L]`$ and variance $`\mathrm{Var}(L)`$ estimated from `req_latency_ms`.
+- $`T_p`$ and $`T_c`$ as token-count random variables with $`\mathbb{E}[T_p]`$, $`\mathbb{E}[T_c]`$ and associated variances.
+- $`E`$ as a Bernoulli error indicator (1 if an error occurred, 0 otherwise) with error probability
+  $`P(E = 1) = \mathbb{E}[E] \approx \frac{\mathrm{errors\_total}}{\mathrm{requests\_total}}`$.
 
 Using these, a **conceptual system reliability metric** over a sliding window of recent calls can be written as
+$`R_{\mathrm{sys}} = P(E = 1 \mid \mathrm{window}) \approx \hat{p}_E`$,
 
-$$ R_{sys} = P(E = 1 \mid \text{window}) \approx \hat{p}_E, $$
-
-where $\hat{p}_E$ is the empirical error rate in that window. This $R_{sys}$ is about **technical reliability of the AI/telemetry pipeline**, not about clinical risk or patient outcomes.
+where $`\hat{p}_E`$ is the empirical error rate in that window. This $`R_{\mathrm{sys}}`$ is about **technical reliability of the AI/telemetry pipeline**, not about clinical risk or patient outcomes.
 
 Any such analysis must:
 
@@ -1233,5 +1231,6 @@ Teaching and research contexts: suitable for OSCE training, digital psychiatry s
 
 - **Is the session ML model a predictor of clinical outcome or risk?**  
   No. The `useSessionML` hook models time‑allocation patterns (e.g., typical segment sequences) for convenience only; it does not encode or predict clinical risk, response, or outcomes.
+
 
 
