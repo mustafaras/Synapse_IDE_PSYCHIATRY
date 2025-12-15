@@ -355,17 +355,17 @@ To add a new validated scale in a way that is consistent with existing calculato
 
 For any new instrument, clinical content and anchors must be derived from the original validation literature or institutional guidance; the repository should remain transparent and deterministic about how scores are computed and interpreted.
 
-#### Scale‑specific vector notation and scoring functions
+#### Scale-specific vector notation and scoring functions
 
 For clarity, we can index each instrument with its own response vector and scoring function. Let
 
-- $x^{(phq)} = (x^{(phq)}_1, \dots, x^{(phq)}_9)$ with $x^{(phq)}_i \in \{0,1,2,3\}$,
-- $x^{(gad)} = (x^{(gad)}_1, \dots, x^{(gad)}_7)$ with $x^{(gad)}_i \in \{0,1,2,3\}$,
-- $x^{(pcl)} = (x^{(pcl)}_1, \dots, x^{(pcl)}_{20})$ with $x^{(pcl)}_i \in \{0,1,2,3,4\}$,
-- $x^{(ybocs)} = (x^{(ybocs)}_1, \dots, x^{(ybocs)}_{10})$ with $x^{(ybocs)}_i \in \{0,1,2,3,4\}$,
-- $x^{(audit)} = (x^{(audit)}_1, x^{(audit)}_2, x^{(audit)}_3)$ with $x^{(audit)}_i$ in the AUDIT‑C item ranges.
+- $`x^{(phq)} = (x^{(phq)}_1, \dots, x^{(phq)}_9)`$ with $`x^{(phq)}_i \in \{0,1,2,3\}`$,
+- $`x^{(gad)} = (x^{(gad)}_1, \dots, x^{(gad)}_7)`$ with $`x^{(gad)}_i \in \{0,1,2,3\}`$,
+- $`x^{(pcl)} = (x^{(pcl)}_1, \dots, x^{(pcl)}_{20})`$ with $`x^{(pcl)}_i \in \{0,1,2,3,4\}`$,
+- $`x^{(ybocs)} = (x^{(ybocs)}_1, \dots, x^{(ybocs)}_{10})`$ with $`x^{(ybocs)}_i \in \{0,1,2,3,4\}`$,
+- $`x^{(audit)} = (x^{(audit)}_1, x^{(audit)}_2, x^{(audit)}_3)`$ with $`x^{(audit)}_i`$ in the AUDIT-C item ranges.
 
-Each measure $m \in \{phq, gad, pcl, ybocs, audit\}$ has an associated scoring function
+Each measure $`m \in \{phq, gad, pcl, ybocs, audit\}`$ has an associated scoring function
 
 $$ s_m : X_m \to \mathbb{R}, \quad s_m\big(x^{(m)}\big) = \sum_{i=1}^{n_m} w^{(m)}_i x^{(m)}_i, $$
 
@@ -585,27 +585,17 @@ sequenceDiagram
 
 We can describe the AI orchestration layer in terms of abstract spaces and maps:
 
-- Let $P$ denote the **prompt space**, consisting of prompt text plus structured metadata (e.g., role, clinical vs. non‑clinical context, safety notes).
-- Let $\Theta$ denote a **canonical sampling parameter space**, e.g., $\theta = (T, p, M, J)$ for temperature $T$, top‑p $p$, max tokens $M$, JSON‑mode flag $J$, etc.
-- For each provider $p$ (OpenAI, Anthropic, Gemini, Ollama, ...), let $\Theta_p$ be the provider‑specific parameter space (JSON schema) and
+- Let $`P`$ denote the **prompt space**, consisting of prompt text plus structured metadata (e.g., role, clinical vs. non-clinical context, safety notes).
+- Let $`\Theta`$ denote a **canonical sampling parameter space**, e.g., $`\theta = (T, p, M, J)`$ for temperature $`T`$, top-p $`p`$, max tokens $`M`$, JSON-mode flag $`J`$, etc.
+- For each provider $`p`$ (OpenAI, Anthropic, Gemini, Ollama, ...), let $`\Theta_p`$ be the provider-specific parameter space (JSON schema) and let $`N_p : \Theta \to \Theta_p`$ be the **parameter normalisation map** implemented by `param-normalizer.ts` plus provider-specific helpers in `samplingMapper.ts`.
 
-  $$ N_p : \Theta \to \Theta_p $$
+Given a context object $`c`$ in the UI (e.g., flow outcome text + options), we can write:
 
-  the **parameter normalisation map** implemented by `param-normalizer.ts` plus provider‑specific helpers in `samplingMapper.ts`.
+1. A **prompt builder**: $`\text{buildPrompt} : C \to P,\quad p = \text{buildPrompt}(c)`$.
+2. A **provider call map**: $`\Phi_p : P \times \Theta_p \to Y`$, where $`Y`$ is the space of model outputs (streaming tokens, final text, usage metadata).
 
-Given a context object $c$ in the UI (e.g., flow outcome text + options), we can write:
+The overall (non-streaming) call can then be expressed as the composition $`\Phi_p(\text{buildPrompt}(c),\, N_p(\theta))`$.
 
-1. A **prompt builder**
-
-   $$ \text{buildPrompt} : C \to P, \quad p = \text{buildPrompt}(c). $$
-
-2. A **provider call map**
-
-   $$ \Phi_p : P \times \Theta_p \to Y, $$
-
-   where $Y$ is the space of model outputs (streaming tokens, final text, usage metadata).
-
-The overall (non‑streaming) call can then be expressed as the composition
 
 $$ \text{call}_p(c, \theta) = \Phi_p\big(\text{buildPrompt}(c), N_p(\theta)\big), $$
 
@@ -943,29 +933,30 @@ flowchart LR
   Sugg --> Clin[Clinician may accept/ignore]
 ```
 
-  #### Derived session features and basic distributions (conceptual)
+#### Derived session features and basic distributions (conceptual)
 
-  From the raw segments $\{(t_i, \ell_i)\}_{i=1}^N$, we can construct a feature vector summarizing a session in a way that is potentially useful for anonymised analytics or local `useSessionML`‑style models:
+From the raw segments $`\{(t_i, \ell_i)\}_{i=1}^N`$, we can construct a feature vector summarizing a session in a way that is potentially useful for anonymised analytics or local `useSessionML`-style models:
 
-  1. **Total duration**
+1. **Total duration**: $`T_{\mathrm{total}} = \sum_{i=1}^{N} t_i`$.
 
-    $$ T_{total} = \sum_{i=1}^{N} t_i. $$
+2. **Per-label time allocation**
 
-  2. **Per‑label time allocation**
+   For each label $`\ell`$ in the label set $`L`$, define
+   $`T_\ell = \sum_{i:\,\ell_i=\ell} t_i`$
+   and
+   $`p(\ell) = \frac{T_\ell}{T_{\mathrm{total}}}`$
+   with the condition $`T_{\mathrm{total}} > 0`$.
 
-    For each label $\ell$ in the label set $L$, define
+   The vector
+   $`v = \big(T_{\mathrm{total}}, \{T_\ell\}_{\ell \in L}, N, \{p(\ell)\}_{\ell \in L}\big)`$
+   is a simple session feature representation capturing both absolute and relative time allocation.
 
-    $$ T_\ell = \sum_{i: \ell_i = \ell} t_i, \qquad p(\ell) = \frac{T_\ell}{T_{total}} \quad (T_{total} > 0). $$
+3. **Segment-count features**
 
-    The vector
+   Counts of segments per label
+   $`n_\ell = |\{i : \ell_i = \ell\}|`$
+   can be added to the feature vector to characterize how fragmented a session is.
 
-    $$ v = \big(T_{total}, \{T_\ell\}_{\ell \in L}, N, \{p(\ell)\}_{\ell \in L}\big) $$
-
-    is a simple session feature representation capturing both absolute and relative time allocation.
-
-  3. **Segment‑count features**
-
-    Counts of segments per label $n_\ell = |\{i : \ell_i = \ell\}|$ can be added to the feature vector to characterize how fragmented a session is.
 
   These features are **conceptual/illustrative** only and are not reported to any external service by default. In principle, they could be computed locally and used as inputs to on‑device models (e.g., to predict likely next segments), but any such analytics must respect privacy constraints and institutional governance.
 
@@ -1242,4 +1233,5 @@ Teaching and research contexts: suitable for OSCE training, digital psychiatry s
 
 - **Is the session ML model a predictor of clinical outcome or risk?**  
   No. The `useSessionML` hook models time‑allocation patterns (e.g., typical segment sequences) for convenience only; it does not encode or predict clinical risk, response, or outcomes.
+
 
