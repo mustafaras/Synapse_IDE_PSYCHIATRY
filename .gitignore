@@ -1,0 +1,55 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Local environment
+.env
+.env.local
+
+# Env files (keep only example in Git)
+.env.*
+!.env.example
+
+# Explicitly ignore any env files under src/
+src/.env
+src/.env.*
+
+# Ignore ephemeral code snapshots
+src/*.zip
+
+# Test outputs & reports
+playwright-report
+test-results
+junit.xml
+
+# Coverage
+coverage
+.nyc_output
+
+# Build caches & misc
+*.tsbuildinfo
+.vitest
+.cache
+tmp
+temp
