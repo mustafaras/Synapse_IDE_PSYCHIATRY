@@ -66,9 +66,10 @@ In production, these should be set via your platform’s secret manager or envir
 ### Install and run (development)
 
 ```bash
-npm install
 npm run dev
 ```
+
+`npm run dev` checks dependencies and installs them automatically on first run when needed.
 
 By default, Vite serves the app on `http://localhost:5173` (or `http://localhost:3000` if you use the `dev:safe` script). The main SPA entry loads at the root path (`/`).
 
@@ -1004,9 +1005,6 @@ flowchart TD
 git clone [ADD REPO URL]
 cd coder-app
 
-# install
-npm install
-
 # dev server
 npm run dev
 
@@ -1020,7 +1018,7 @@ npm run preview
 
 ### Quickstart for Clinicians (local sandbox)
 1. Install Node.js 20+.
-2. Run `npm install` then `npm run dev`.
+2. Run `npm run dev`.
 3. In the UI, use local features: MBC calculators, flows, and the session timer.
 4. Optionally enable local models with Ollama; leave cloud providers unset.
 
